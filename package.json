@@ -1,0 +1,19 @@
+{
+  "name": "generador-uuid",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "compression": "^1.8.0",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "uuid": "^11.1.0",
+    "helmet": "8.1.0"
+  }
+}
