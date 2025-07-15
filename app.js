@@ -6,7 +6,17 @@ require('dotenv').config();
 const {v4: uuidv4}=require('uuid');
 
 const app=express();
-app.use(helmet());
+//app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            "default-src": ["'self'"],
+            "style-src": ["'self'", "'unsafe-inline'"],
+            "script-src-attr": ["'self'", "'unsafe-inline'"],
+            "script-src-elem": ["'self'", "https://code.jquery.com", "'unsafe-inline'", "'unsafe-hashes'"],
+        }
+    }
+}));
 app.use(compression());
 
 const serverHttp=http.createServer(app);
@@ -23,3 +33,12 @@ app.get('/api/get-uuid', (req,res) => {
     //res.send(uuidv4());
     //res.send("Hola mundo");
 });
+
+app.use((req, res) => {
+   // res.status(404).send('Error 404 - Resource not found');
+    res.status(404).json({
+        error: 'Resource not found!',
+        path: req.originalUrl
+    })
+})
+
